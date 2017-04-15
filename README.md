@@ -1,5 +1,5 @@
 # casual-snakejs
-This project is the outcome of me trying to learn JavaScript properly.
+This project is the outcome of me trying to learn JavaScript properly. Follow [this link](http://casualsemantics.se/misc/snake/) to try it out! You control the snake using the arrow buttons on your keybourd or by swiping if you have a touch screen. Enjoy!
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
