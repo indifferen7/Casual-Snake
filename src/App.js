@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Grid from './components/grid';
 
 class App extends React.Component {

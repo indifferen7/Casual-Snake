@@ -15,7 +15,7 @@ const directions = {
             case directions.left:
                 return [x - 1, y];
             default:
-                throw 'No such direction: ' + direction;
+                throw new Error(`No such direction: ${direction}`);
         }
     },
     turnLeft: (direction) => {
