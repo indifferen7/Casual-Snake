@@ -1,4 +1,4 @@
-import {deepEquals} from '../model/common';
+import {coordEquals} from '../model/common';
 
 export const apple = (grid, snake) => {
 
@@ -8,7 +8,7 @@ export const apple = (grid, snake) => {
         while (true) {
             const coord = grid.anywhere();
 
-            if (snake.coords().filter(deepEquals(coord)).length === 0) {
+            if (snake.coords().filter(coordEquals(coord)).length === 0) {
                 value = coord;
                 break;
             }

@@ -1,7 +1,7 @@
 import directions from '../model/directions';
 import * as Hammer from 'hammerjs';
 
-const swipeSupport = (callback, canvasId) => {
+const activateSwipeSupport = (callback, canvasId) => {
     const hammer = new Hammer.default(document.getElementById(canvasId));
 
     hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
@@ -20,7 +20,7 @@ const swipeSupport = (callback, canvasId) => {
     });
 };
 
-export const input = (callback, canvasId) => {
+export const input = (callback) => {
 
     const handler = (event) => {
         if(event.keyCode === 39) {
@@ -29,20 +29,21 @@ export const input = (callback, canvasId) => {
         else if(event.keyCode === 37) {
             callback({direction: directions.left});
         }
-        if(event.keyCode === 40) {
+        else if(event.keyCode === 40) {
             callback({direction: directions.down});
         }
         else if(event.keyCode === 38) {
             callback({direction: directions.up});
         }
-        else if(event.keyCode === 32) {
-            callback({reset: 'oh yeah'});
-        }
     };
 
     document.addEventListener('keydown', handler, false);
 
-    swipeSupport(callback, canvasId);
+    return {
+        withSwipeSupport: (canvasId) => {
+            activateSwipeSupport(callback, canvasId);
+        }
+    };
 };
 
 export default input;

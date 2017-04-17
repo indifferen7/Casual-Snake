@@ -2,7 +2,7 @@ import grid from '../model/grid';
 import directions from '../model/directions';
 
 const level1 = () => {
-    const fps = 20,
+    const fps = 10,
           size = 50,
           theGrid = grid(size, size);
 
@@ -15,9 +15,10 @@ const level1 = () => {
             next: theGrid.next,
             opts: {
                 direction: directions.any(),
-                size: 3
+                size: 2
             }
-        }
+        },
+        increaseSpeedBy: 2
     };
 };
 

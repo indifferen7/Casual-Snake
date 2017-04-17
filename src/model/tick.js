@@ -25,6 +25,9 @@ export default function tick(callback, fps = 1) {
             running = true;
             run();
         },
+        increaseSpeed: (amount) => {
+            interval = interval - amount > 1 ? interval - amount : 1;
+        },
         stop: () => {
             running = false;
         }
