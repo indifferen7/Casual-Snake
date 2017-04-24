@@ -1,6 +1,6 @@
-import {coordEquals} from '../model/common';
+import {coordEquals} from './common';
 
-export const apple = (grid, snake) => {
+const apple = (grid, snake) => {
 
     let value = undefined;
 

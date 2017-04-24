@@ -1,12 +1,13 @@
-import grid from '../model/grid';
-import directions from '../model/directions';
+import grid from '../grid';
+import directions from '../directions';
 
-const level1 = () => {
+const normal = () => {
     const fps = 10,
           size = 50,
           theGrid = grid(size, size);
 
     return {
+        name: 'normal',
         fps: fps,
         size: size,
         grid: theGrid,
@@ -18,8 +19,8 @@ const level1 = () => {
                 size: 2
             }
         },
-        increaseSpeedBy: 2
+        increaseSpeedBy: 1.5
     };
 };
 
-export default level1;
+export default normal;

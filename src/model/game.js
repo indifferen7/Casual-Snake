@@ -1,7 +1,7 @@
 import tick from '../model/tick';
 import snake from '../model/snake';
 import input from '../model/input';
-import {apple} from '../model/apple';
+import apple from '../model/apple';
 import {coordEquals} from '../model/common';
 
 const hitIllegalCoord = (illegal) => {
@@ -44,7 +44,13 @@ const game = (callback, canvasId, level) => {
             theTick.increaseSpeed(level.increaseSpeedBy);
         }
 
-        callback({ type: 'movement', snake: snakeCoords, apple: theApple.get(), points: points, length: snakeCoords.length });
+        callback({
+            type: 'movement',
+            snake: snakeCoords,
+            apple: theApple.get(),
+            points: points,
+            ateApple: ateApple
+        });
 
         const gameOver = hitIllegalCoord(snakeCoords);
 
@@ -67,6 +73,7 @@ const game = (callback, canvasId, level) => {
             theTick.start();
         },
         stop: theTick.stop,
+        isRunning: theTick.isRunning,
         points: 0
     }
 };

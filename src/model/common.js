@@ -4,3 +4,6 @@ export const coordEquals = ([x1, y1]) => {
         return x1 === x2 && y1 === y2;
     };
 };
+
+export const sleep = (time) =>
+    new Promise((resolve) => setTimeout(resolve, time));

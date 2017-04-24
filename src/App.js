@@ -1,33 +1,36 @@
 import React from 'react';
-import Grid from './components/grid';
+import Start from './components/start';
+import Game from './components/game';
+import normal from './model/levels/normal';
+import hard from './model/levels/hard';
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.setInfo = this.setInfo.bind(this);
-        this.state = {points: 0};
+        this.state = {
+            view: 'start'
+        };
+
+        this.changeView = this.changeView.bind(this);
     }
 
-    setInfo({points, length}) {
-        this.setState({
-            points: points,
-            length: length
-        });
+    changeView(view) {
+        this.setState({view: view});
     }
 
     render() {
-        const dimensions = window.innerHeight > window.innerWidth
-            ? window.innerWidth
-            : window.innerHeight;
-
-        return (
-            <div style={{margin: '0 auto', width: dimensions, height: dimensions}} id={'game'}>
-                <div style={{position: 'absolute', color: '#73581D', margin: '5px'}}>Points: {this.state.points} | Snake length: {this.state.length}</div>
-                <Grid setInfo={this.setInfo} />
-            </div>
-        );
+        switch (this.state.view) {
+            case 'normal':
+                return (<Game changeView={this.changeView} level={normal()} />);
+            case 'hard':
+                return (<Game changeView={this.changeView} level={hard()} />);
+            case 'nightmare':
+                return (<Game changeView={this.changeView} level={hard()} />);
+            default:
+                return (<Start changeView={this.changeView} />);
+        }
     }
 }
 

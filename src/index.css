@@ -1,11 +1,69 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  color: #FFFEC0;
+  font-family: monospace;
+  color: #73581D;
   background-color: #FE9F8C;
 }
 
 #canvas {
   background-color: #FFE2A6;
+  position:absolute;
+  top: 0;
+  z-index: 1;
+}
+
+#status {
+  position: absolute;
+  z-index:2;
+  color: #73581D;
+  margin: 5px;
+  display: none;
+}
+
+h1 {
+  margin-top: 0;
+}
+.dialogue {
+  position: absolute;
+  padding: 1em;
+  width: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: #FFE2A6;
+  transform: translateY(-150%);
+}
+
+.hide {
+  transform: translateY(-150%);
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-delay: 0.2s;
+}
+
+.show {
+  transform: translateY(0%);
+  transition-duration: 1s;
+  transition-timing-function: ease;
+}
+
+.menuitem {
+  background-color: #FFFEC0;
+  padding: 1em;
+  margin: 0.5em 0.5em;
+}
+.menuitem:hover {
+  cursor: pointer;
+  border-left: 1em #73581D solid;
+}
+.menuitem-disabled {
+  background-color: #FFFEC0;
+  padding: 1em;
+  margin: 0.5em 0.5em;
+  opacity: 0.5;
+}
+
+#game {
+  color: #FFFEC0;
 }
