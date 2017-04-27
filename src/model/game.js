@@ -8,6 +8,7 @@ const game = (callback, canvasId, level) => {
 
     let points = 0,
         pool = 0,
+        sacrificeThreshold = 10,
         nextDirection = undefined,
         theTick = undefined;
 
@@ -47,12 +48,13 @@ const game = (callback, canvasId, level) => {
         let sacrificeCompleted = false;
         if (entersPool) {
             points = points === 0 ? 0 : points - 1;
-            if (pool < 9) {
+            if (pool < sacrificeThreshold) {
                 pool++;
             } else {
                 sacrificeCompleted = true;
                 pool = 0;
                 points += 20;
+                sacrificeThreshold++;
             }
         }
 
