@@ -53,7 +53,7 @@ const game = (callback, canvasId, level) => {
             } else {
                 sacrificeCompleted = true;
                 pool = 0;
-                points += 20;
+                points += sacrificeThreshold + 10;
                 sacrificeThreshold++;
             }
         }
