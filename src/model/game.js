@@ -2,31 +2,17 @@ import tick from '../model/tick';
 import snake from '../model/snake';
 import input from '../model/input';
 import apple from '../model/apple';
-import {coordEquals} from '../model/common';
-
-const hitIllegalCoord = (illegal) => {
-    return !illegal.reduce(function(acc, val) {
-            if (acc === false) {
-                return acc;
-            }
-
-            if (acc.filter(coordEquals(val)).length > 0) {
-                return false;
-            } else {
-                acc.push(val);
-                return acc;
-            }
-        }, []);
-};
+import {containsCoord} from '../model/common';
 
 const game = (callback, canvasId, level) => {
 
     let points = 0,
+        pool = 0,
         nextDirection = undefined,
         theTick = undefined;
 
     const theSnake = snake(level.snakeArgs.start, level.snakeArgs.next, level.snakeArgs.opts),
-          theApple = apple(level.grid, theSnake);
+          theApple = apple(level.grid);
 
     const tickHandler = () => {
         if (nextDirection !== undefined) {
@@ -34,14 +20,40 @@ const game = (callback, canvasId, level) => {
             nextDirection = undefined;
         }
 
-        const snakeCoords = theSnake.move(),
-              ateApple = coordEquals(theSnake.head())(theApple.get());
+        const destination = level.snakeArgs.next(theSnake.head(), theSnake.direction()),
+              illegalBeforeMove = theSnake.coords().concat(level.walls || []),
+              gameOver = containsCoord(destination, illegalBeforeMove),
+              entersPool = level.pool && containsCoord(destination, level.pool);
+
+        if (gameOver) {
+            callback({ type: 'gameover' });
+            return;
+        }
+
+        const snakeCoords = theSnake.move(entersPool),
+              illegalAfterMove = theSnake.coords().concat(level.walls || []),
+              ateApple = snakeCoords.length !== 0 && theApple.consumeIfPossible(theSnake.head());
 
         if (ateApple) {
             points++;
             theSnake.grow(3);
-            theApple.place();
             theTick.increaseSpeed(level.increaseSpeedBy);
+        }
+
+        if (!theApple.isPresent()) {
+            theApple.place(illegalAfterMove.concat(level.pool || []));
+        }
+
+        let sacrificeCompleted = false;
+        if (entersPool) {
+            points = points === 0 ? 0 : points - 1;
+            if (pool < 9) {
+                pool++;
+            } else {
+                sacrificeCompleted = true;
+                pool = 0;
+                points += 20;
+            }
         }
 
         callback({
@@ -49,12 +61,11 @@ const game = (callback, canvasId, level) => {
             snake: snakeCoords,
             apple: theApple.get(),
             points: points,
-            ateApple: ateApple
+            ateApple: ateApple,
+            sacrificeComplete: sacrificeCompleted
         });
 
-        const gameOver = hitIllegalCoord(snakeCoords);
-
-        if (gameOver) {
+        if (snakeCoords.length === 0) {
             callback({ type: 'gameover' });
         }
     };

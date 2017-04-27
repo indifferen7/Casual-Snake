@@ -1,24 +1,30 @@
 import {coordEquals} from './common';
 
-const apple = (grid, snake) => {
+const apple = (grid) => {
 
     let value = undefined;
 
-    const place = () => {
+    const place = (illegal) => {
         while (true) {
             const coord = grid.anywhere();
 
-            if (snake.coords().filter(coordEquals(coord)).length === 0) {
+            if (illegal.filter(coordEquals(coord)).length === 0) {
                 value = coord;
                 break;
             }
         }
     };
 
-    place();
-
     return {
         place: place,
+        consumeIfPossible: (coord) => {
+            if (value && coordEquals(coord)(value)) {
+                value = undefined;
+                return true;
+            }
+            return false;
+        },
+        isPresent: () => value !== undefined,
         get: () => { return value; }
     }
 };

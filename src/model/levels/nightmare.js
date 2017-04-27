@@ -2,7 +2,7 @@ import grid from '../grid';
 import directions from '../directions';
 import {hLine, vLine} from '../common';
 
-const hard = () => {
+const nightmare = () => {
     const fps = 15,
         size = 50,
         theGrid = grid(size, size),
@@ -19,25 +19,33 @@ const hard = () => {
             .concat(vLine(0)(1, 19))
             .concat(vLine(0)(30, 19))
             .concat(vLine(49)(1, 19))
-            .concat(vLine(49)(30, 19));
+            .concat(vLine(49)(30, 19))
+            .concat(vLine(10)(10, 30))
+            .concat(vLine(40)(10, 30))
+            .concat(hLine(10)(11, 5))
+            .concat(hLine(11)(11, 5))
+            .concat(hLine(39)(11, 14))
+            .concat(hLine(10)(26, 14))
+            .concat(hLine(39)(35, 5))
+            .concat(hLine(38)(35, 5));
 
     return {
-        name: 'hard',
+        name: 'nightmare',
         fps: fps,
         size: size,
         grid: theGrid,
         snakeArgs: {
-            start: [20,20],
+            start: [21,21],
             next: theGrid.next,
             opts: {
-                direction: directions.any(),
+                direction: directions.up,
                 size: 2
             }
         },
-        walls: walls,
         pool: pool,
-        increaseSpeedBy: 2
+        walls: walls,
+        increaseSpeedBy: 3
     };
 };
 
-export default hard;
+export default nightmare;

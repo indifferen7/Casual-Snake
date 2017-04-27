@@ -8,7 +8,7 @@ class MainMenu extends React.Component {
         this.handleAction = this.handleAction.bind(this);
         this.state = {
             cssClass: 'dialogue hide'
-        }
+        };
     }
 
     handleAction(action) {
@@ -23,16 +23,18 @@ class MainMenu extends React.Component {
     render() {
         return (
             <div className={this.state.cssClass}>
-                <h1>Omg! Snake! o_o</h1>
-                <MenuItem text="Normal" action="normal" handleAction={this.handleAction} />
-                <MenuItem text="Hard (not yet implemented)" action="hard" disabled={true} handleAction={this.handleAction} />
-                <MenuItem text="Nightmare (not yet implemented)" action="nightmare" disabled={true} handleAction={this.handleAction} />
+                <h1 className={'title'}>Casual Snake<span>and the mystical pool</span></h1>
+                <LevelItem text="Normal" action="normal" handleAction={this.handleAction} />
+                <LevelItem text="Hard" action="hard" handleAction={this.handleAction} />
+                <LevelItem text="Nightmare" action="nightmare" handleAction={this.handleAction} />
+                <InfoItem text="The story" action="manual" handleAction={this.handleAction} />
+                <InfoItem text="About" action="about" handleAction={this.handleAction} />
             </div>
         )
     }
 }
 
-class MenuItem extends React.Component {
+class LevelItem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -45,11 +47,26 @@ class MenuItem extends React.Component {
     }
 
     render() {
-        const div = this.props.disabled
+        return this.props.disabled
             ? (<div className={'menuitem-disabled'}>{this.props.text}</div>)
-            : (<div onClick={this.handleClick} className={'menuitem'}>{this.props.text  + ' | High score: ' + highscore(this.props.action).get()}</div>);
+            : (<div onClick={this.handleClick} className={'menuitem'}>{this.props.text  + ' | Personal best: ' + highscore(this.props.action).get()}</div>);
+    }
+}
 
-        return div;
+class InfoItem extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+        this.props.handleAction(this.props.action);
+    }
+
+    render() {
+        return (<div onClick={this.handleClick} className={'infoitem'}>{this.props.text}</div>);
     }
 }
 

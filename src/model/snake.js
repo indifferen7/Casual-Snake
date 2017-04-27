@@ -11,8 +11,10 @@ export default function snake(start, next, {direction = directions.any(), size =
 
     return {
         head: head,
-        move: () => {
-            queue.push(next(head(), facing));
+        move: (entersPool) => {
+            if (!entersPool) {
+                queue.push(next(head(), facing));
+            }
 
             if (growth > 0) {
                 growth--;

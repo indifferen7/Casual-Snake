@@ -3,14 +3,19 @@ import Start from './components/start';
 import Game from './components/game';
 import normal from './model/levels/normal';
 import hard from './model/levels/hard';
+import nightmare from './model/levels/nightmare';
+import Manual from './components/manual';
+import About from './components/about';
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
 
+        const firstPlay = localStorage.getItem("firstPlay") === null;
+
         this.state = {
-            view: 'start'
+            view: firstPlay ? 'manual' : 'start'
         };
 
         this.changeView = this.changeView.bind(this);
@@ -27,7 +32,11 @@ class App extends React.Component {
             case 'hard':
                 return (<Game changeView={this.changeView} level={hard()} />);
             case 'nightmare':
-                return (<Game changeView={this.changeView} level={hard()} />);
+                return (<Game changeView={this.changeView} level={nightmare()} />);
+            case 'manual':
+                return (<Manual changeView={this.changeView} />);
+            case 'about':
+                return (<About changeView={this.changeView} />);
             default:
                 return (<Start changeView={this.changeView} />);
         }

@@ -21,14 +21,28 @@ class Grid extends React.Component {
 
         ctx.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
 
+        ctx.fillStyle = '#FE9F8C';
+        ctx.fillRect(this.props.apple[0] * cellSize, this.props.apple[1] * cellSize, cellSize, cellSize);
+
         ctx.fillStyle = '#7D9E3C';
 
         this.props.snake.forEach(cell => {
             ctx.fillRect(cell[0] * cellSize, cell[1] * cellSize, cellSize, cellSize);
         });
 
-        ctx.fillStyle = '#FE9F8C';
-        ctx.fillRect(this.props.apple[0] * cellSize, this.props.apple[1] * cellSize, cellSize, cellSize);
+        if (this.props.walls) {
+            ctx.fillStyle = '#73581D';
+            this.props.walls.forEach(cell => {
+                ctx.fillRect(cell[0] * cellSize, cell[1] * cellSize, cellSize, cellSize);
+            });
+        }
+
+        if (this.props.pool) {
+            ctx.fillStyle = '#6ABCEB';
+            this.props.pool.forEach(cell => {
+                ctx.fillRect(cell[0] * cellSize, cell[1] * cellSize, cellSize, cellSize);
+            });
+        }
     }
 
     render() {

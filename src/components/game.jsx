@@ -39,6 +39,9 @@ class Game extends React.Component {
             if (payload.ateApple) {
                 sounds.nom.play();
             }
+            if (payload.sacrificeComplete) {
+                sounds.sacrificeComplete.play();
+            }
         }
         else if (payload.type === 'gameover') {
             this.stop();
@@ -92,19 +95,23 @@ class Game extends React.Component {
             ? window.innerWidth
             : window.innerHeight;
 
-        const showStatus = this.state.showStatus ? 'block' : 'none';
+        const showStatus = this.state.showStatus ? 'block' : 'none',
+              newRecord = this.state.points > this.scoreToBeat;
 
         return (
             <div style={{margin: '0 auto', width: dimensions, height: dimensions}} id={'game'}>
-                <div id={'status'} style={{display: showStatus}}>Points: {this.state.points} | Score to beat: {this.scoreToBeat}</div>
+                <div id={'status'} style={{display: showStatus, textAlign: 'center'}}>Points: {this.state.points} | Best: {this.scoreToBeat}</div>
                 <Outcome returnToMenu={this.returnToMenu}
                          points={this.state.points}
+                         newRecord={newRecord}
                          show={this.state.showOutcome} />
                 <Grid snake={this.state.snake}
                       apple={this.state.apple}
+                      walls={this.props.level.walls}
+                      pool={this.props.level.pool}
                       show={this.state.showGrid}
                       size={this.props.level.size}
-                      start={this.start} />
+                      start={this.start}/>
             </div>
         );
     }
@@ -123,12 +130,22 @@ class Outcome extends React.Component {
     }
 
     render() {
-        const className = this.props.show ? 'dialogue show' : 'dialogue hide';
+        const className = this.props.show ? 'dialogue show' : 'dialogue hide',
+            newRecord = this.props.newRecord ? 'That\'s a new personal best! Yay!' : '';
 
         return (
-            <div className={className} style={{color: '#73581D', cursor: 'pointer'}} onClick={this.handleClick}>
-                <h1>Omg! Snake ate {this.props.points} apples!</h1>
-                Tap/click here to return to snake menu.
+            <div className={className} style={{color: '#73581D', cursor: 'pointer', textAlign: 'center'}} onClick={this.handleClick}>
+                <h1 className={'title'}>Casual Snake<span>and the mystical pool</span></h1>
+                <div className={'result'}>
+                    Final score:
+                    <span style={{fontSize: '2em', display: 'block',textShadow: '.05em .05em #FE9F8C', marginBottom: '.2em'}}>
+                        {this.props.points} points
+                    </span>
+                    {newRecord}
+                </div>
+                <p>
+                    (tap/click here to return to menu)
+                </p>
             </div>
         );
     }
