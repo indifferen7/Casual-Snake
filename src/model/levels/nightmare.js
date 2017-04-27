@@ -3,7 +3,7 @@ import directions from '../directions';
 import {hLine, vLine} from '../common';
 
 const nightmare = () => {
-    const fps = 15,
+    const fps = 12,
         size = 50,
         theGrid = grid(size, size),
         pool = vLine(23)(22, 6)
@@ -44,7 +44,7 @@ const nightmare = () => {
         },
         pool: pool,
         walls: walls,
-        increaseSpeedBy: 3
+        increaseSpeedBy: 2
     };
 };
 

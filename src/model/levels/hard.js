@@ -3,7 +3,7 @@ import directions from '../directions';
 import {hLine, vLine} from '../common';
 
 const hard = () => {
-    const fps = 15,
+    const fps = 11,
         size = 50,
         theGrid = grid(size, size),
         pool = vLine(23)(22, 6)
