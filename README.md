@@ -1,27 +1,27 @@
-# casual-snakejs
-This project is the outcome of me trying to learn JavaScript properly. Follow [this link](http://casualsemantics.se/misc/snake/) to try it out! You control the snake using the arrow buttons on your keybourd or by swiping if you have a touch screen. Enjoy!
+_One night, Snake had a dream. Snake dreamt of a world with unlimited supplies of tasty pixel apples, which was his favorite snack. However, the dream was not a happy one. In this world, a mystical and terrible pool called out for him, promising great rewards, but at the cost of great sacrifice. The strange situation Snake was in made him crawl around in such a pace that walls and even his own body became a lethal threat._
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+_The pool calls as the dream carries on.._
 
-## Available Scripts
+## Casual Snake and the mystical pool?
 
-In the project directory, you can run:
+This game is a simple and fun take on a [Snake game](https://en.wikipedia.org/wiki/Snake_(video_game)) with a twist. Casual Snake introduces the concept of a pool that can make things quite interesting.
 
-### `npm start`
+## How do I control Snake?
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Use your arrow keys or swipe if you're using a mobile device.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## I love this game, but it sucks to enter the URL in my mobile phone each time I want to play
 
-### `npm test`
+Then add it as a desktop entry! :)
 
-Launches the test runner in the interactive watch mode.<br>
-### `npm run build`
+## Is there a leaderboard?
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Nope, your scores are stored locally in your browser. Screenshots and other ways to brag about your points will have to do.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed
+## Things does not work
+
+That may be because you're using Internet Explorer. This game was developed using Chrome, so you can always try to switch to that browser instead.
+
+# A technical note
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Follow the instructions there if you want to fire up the game after cloning this repo.
