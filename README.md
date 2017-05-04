@@ -2,6 +2,8 @@ _One night, Snake had a dream. Snake dreamt of a world with unlimited supplies o
 
 _The pool calls as the dream carries on.._
 
+[Start the game by following this link](https://indifferen7.github.io/casual-snakejs/).
+
 ## Casual Snake and the mystical pool?
 
 This game is a simple and fun take on a [Snake game](https://en.wikipedia.org/wiki/Snake_(video_game)) with a twist. Casual Snake introduces the concept of a pool that can make things quite interesting.
